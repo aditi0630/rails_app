@@ -1,0 +1,71 @@
+<h3>Contacts List</h3>
+
+
+<br />
+<br />
+To add a new contact : <u><%= link_to 'New Contact', new_contact_path %></u>
+<br />
+<br />
+<div ng-app="" ng-init='people=<%= @contacts.to_json %> '>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  
+  
+  <tbody >
+  	  
+  	  <% @contacts.each do |contact| %>
+  	  
+      <tr >
+        <td><%= contact.Name %></td>
+        <td><%= contact.Phone %></td>
+        <td><%= contact.Email %></td>
+        <td><%= link_to 'Show', contact %></td>
+        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+<br />
+<br />
+Search: <input ng-model="searchText">
+<br />
+<br />
+<br />
+Search Results : 
+<br />
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  
+  
+  <tbody >
+      <tr ng-repeat="c in people | filter : searchText">
+        <td>{{c.Name}}</td>
+        <td>{{c.Phone}} </td>
+        <td>{{c.Email}} </td>
+      </tr>
+      
+ 
+  </tbody>
+</table>
+</div>
+<br>
+
+
